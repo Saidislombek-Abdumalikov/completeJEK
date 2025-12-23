@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEK KARGO - Xitoydan O‘zbekistonga yuk tashish</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#home" onclick="adminClickCounter()" style="cursor: pointer;">
+            <img id="siteLogo" src="jek-logo.png" alt="JEK KARGO" class="me-2">
+            <span id="siteTitle">JEK KARGO</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Bosh sahifa</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Xizmatlar</a></li>
+                <li class="nav-item"><a class="nav-link" href="#calculator">Narx hisoblash</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tracking">Kuzatish</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Aloqa</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero text-center">
+        <div class="container">
+            <h1 id="heroTitle" class="display-4 fw-bold mb-4">Xitoydan O‘zbekistonga tez yuk tashish</h1>
+            <p id="heroSubtitle" class="lead mb-4">JEK KARGO - ishonchli logistika xizmati.</p>
+            <div id="heroPrices" class="mb-4 p-3 bg-dark bg-opacity-50 rounded d-inline-block">
+                <strong>Narxlar (kg uchun): 💲</strong><br>
+                <em>Avto: $6-7.5 🚚 (14-18 kun) | Avia: $9.5-11 ✈️ (3-5 kun)</em><br>
+                <small>1 kg+ : Eng yaqin Emu Pochta bepul!</small>
+            </div>
+            <br><br>
+            <a href="#calculator" class="btn btn-warning btn-lg me-3">Narx hisoblash</a>
+            <a href="#tracking" class="btn btn-light btn-lg">Yukni kuzatish</a>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Xizmatlar</h2>
+            <div id="servicesContainer" class="row g-4">
+                <!-- Services will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator -->
+    <section id="calculator" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Narx hisoblash</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow p-4">
+                        <form id="quoteForm">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Xizmat turi</label>
+                                    <select class="form-select" id="service">
+                                        <option value="avia">Avia kargo (3-5 kun) ✈️</option>
+                                        <option value="avto">Avto kargo (14-18 kun) 🚚</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Donalar soni</label>
+                                    <input type="number" class="form-control" id="items" min="1" value="1" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Og‘irligi (kg)</label>
+                                    <input type="number" class="form-control" id="weight" min="0.1" step="0.1" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">O‘lchamlar (sm: UxExB)</label>
+                                    <input type="text" class="form-control" id="dimensions" placeholder="mas: 50x30x20">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">Hisoblash</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="quoteResult" class="mt-4" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="tracking" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Yukingizni kuzatish</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow p-4">
+                        <div class="input-group mb-4">
+                            <input type="text" class="form-control form-control-lg" id="trackingInput" placeholder="Trek raqamlarini kiriting (vergul bilan ajrating)">
+                            <button class="btn btn-primary btn-lg" onclick="trackCargo()">🔍 Kuzatish</button>
+                        </div>
+                        <div id="trackingResults"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Aloqa</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-map-marker-alt me-2 text-primary"></i>Ofislar</h5>
+                    <div id="contactOffices">
+                        <p><strong>Xitoy:</strong> Yiwu<br>
+                        <strong>O‘zbekiston:</strong> Toshkent (asosiy), Namangan</p>
+                    </div>
+                    <div id="contactDetails">
+                        <p><i class="fas fa-phone me-2"></i><span id="contactPhone">+998 94 948 0542</span><br>
+                        <i class="fab fa-telegram me-2"></i><a id="tg1" href="https://t.me/jekkargo" target="_blank" class="text-primary">t.me/jekkargo</a> | 
+                        <a id="tg2" href="https://t.me/jek_kargo" target="_blank" class="text-primary">t.me/jek_kargo</a><br>
+                        <i class="fab fa-instagram"></i> <a id="instagram" href="https://instagram.com/jekkargo" target="_blank" class="text-primary">@jekkargo</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label class="form-label">Ism</label>
+                            <input type="text" id="contactName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefon</label>
+                            <input type="tel" id="contactPhoneInput" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Xabar</label>
+                            <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="py-4 text-center">
+    <div class="container">
+        <p id="footerText">© 2025 JEK KARGO. Huquqlar himoyalangan.</p>
+        <div id="footerSocial">
+            <a href="https://t.me/jekkargo" class="text-secondary me-3 fs-3" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://t.me/jek_kargo" class="text-secondary me-3 fs-3" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://instagram.com/jekkargo" class="text-secondary fs-3" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<!-- Admin Login Modal -->
+<div class="modal fade" id="adminLoginModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Admin Panel - Kirish</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <label>Parol:</label>
+                <input type="password" class="form-control" id="adminPassword" onkeypress="if(event.key==='Enter') adminAuth()">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor</button>
+                <button type="button" class="btn btn-primary" onclick="adminAuth()">Kirish</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Panel -->
+<section id="adminPanel" style="display:none;" class="py-5">
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white d-flex justify-content-between">
+                <h3>Next Level Admin Panel</h3>
+                <button class="btn btn-light" onclick="logout()">Chiqish</button>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs mb-4" id="adminTabs">
+                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-content">Sayt kontenti</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-settings">Sozlamalar</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-messages">Xabarlar</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-excel">Excel fayllar</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-stats">Statistika</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Content Editing -->
+                    <div class="tab-pane fade show active" id="tab-content">
+                        <h4>Sayt matnlari va logotip</h4>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label>Sayt nomi</label>
+                                <input type="text" id="editSiteTitle" class="form-control">
+                                <button class="btn btn-sm btn-primary mt-2" onclick="saveContent()">Saqlash</button>
+                            </div>
+                            <div class="col-12">
+                                <label>Logotip (URL yoki local yuklash)</label>
+                                <input type="file" id="logoUpload" accept="image/*" class="form-control">
+                                <small>URL kiriting yoki fayl yuklang</small>
+                                <input type="text" id="editLogoUrl" class="form-control mt-2" placeholder="https://...">
+                            </div>
+                            <div class="col-12">
+                                <label>Hero sarlavha</label>
+                                <input type="text" id="editHeroTitle" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label>Hero qisqacha</label>
+                                <textarea id="editHeroSubtitle" class="form-control" rows="2"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label>Hero narxlar bloki (HTML ruxsat)</label>
+                                <textarea id="editHeroPrices" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label>Kontakt ma'lumotlari (ofislar)</label>
+                                <textarea id="editContactOffices" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label>Telefon va ijtimoiy tarmoqlar</label>
+                                <input type="text" id="editContactPhone" placeholder="Telefon" class="form-control mb-2">
+                                <input type="text" id="editTg1" placeholder="Telegram 1" class="form-control mb-2">
+                                <input type="text" id="editTg2" placeholder="Telegram 2" class="form-control mb-2">
+                                <input type="text" id="editInstagram" placeholder="Instagram" class="form-control mb-2">
+                            </div>
+                            <div class="col-12">
+                                <label>Footer matni</label>
+                                <input type="text" id="editFooterText" class="form-control">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h4>Xizmatlar (qo'shish/o'chirish)</h4>
+                        <div id="adminServicesList"></div>
+                        <button class="btn btn-success mt-3" onclick="addNewService()">+ Yangi xizmat qo'shish</button>
+                        <button class="btn btn-primary mt-3 ms-2" onclick="saveContent()">Barchasini saqlash</button>
+                    </div>
+
+                    <!-- Other tabs remain similar but cleaner -->
+                    <div class="tab-pane fade" id="tab-settings">
+                        <!-- Existing settings -->
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label>Dollar kursi</label>
+                                <div class="input-group">
+                                    <input type="number" id="dollarRate" class="form-control">
+                                    <button class="btn btn-primary" onclick="saveSetting('dollarRate')">Saqlash</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Avia narxi</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.1" id="aviaPrice" class="form-control">
+                                    <button class="btn btn-primary" onclick="saveSetting('aviaPrice')">Saqlash</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Avto narxi</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.1" id="avtoPrice" class="form-control">
+                                    <button class="btn btn-primary" onclick="saveSetting('avtoPrice')">Saqlash</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-messages">
+                        <h4>Mijoz xabarlari</h4>
+                        <div id="clientMessages" class="border p-3 rounded" style="max-height:500px;overflow-y:auto;background:#f8f9fa;"></div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-excel">
+                        <h4>Excel fayllar</h4>
+                        <div class="border-dashed p-5 text-center mb-4" onclick="document.getElementById('fileInput').click()" style="cursor:pointer;">
+                            <p>📁 Faylni yuklang</p>
+                        </div>
+                        <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none;" onchange="uploadFile(event)">
+                        <div id="fileList"></div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-stats">
+                        <div class="row text-center mb-4">
+                            <div class="col-md-3"><div class="card p-3"><h5>Tashriflar</h5><h4 id="totalVisits">0</h4></div></div>
+                            <div class="col-md-3"><div class="card p-3"><h5>Qidiruvlar</h5><h4 id="totalSearches">0</h4></div></div>
+                            <div class="col-md-3"><div class="card p-3"><h5>Fayllar</h5><h4 id="uploadedFiles">0</h4></div></div>
+                            <div class="col-md-3"><div class="card p-3"><h5>Kodlar</h5><h4 id="totalCodes">0</h4></div></div>
+                        </div>
+                        <h5>Faoliyat jurnali</h5>
+                        <div id="activityLog" class="border p-3 rounded" style="max-height:400px;overflow-y:auto;background:#f8f9fa;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
