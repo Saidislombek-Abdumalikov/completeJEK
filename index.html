@@ -138,21 +138,22 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form id="contactForm">
-                        <div class="mb-3">
-                            <label class="form-label">Ism</label>
-                            <input type="text" id="contactName" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Telefon</label>
-                            <input type="tel" id="contactPhoneInput" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Xabar</label>
-                            <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Yuborish</button>
-                    </form>
+                   <!-- Inside Contact section, replace the form part -->
+<form id="contactForm">
+    <div class="mb-3">
+        <label class="form-label">Ism</label>
+        <input type="text" id="contactName" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Telefon</label>
+        <input type="tel" id="contactPhoneInput" class="form-control" required> <!-- renamed to avoid conflict -->
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Xabar</label>
+        <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+</form>
                 </div>
             </div>
         </div>
@@ -322,4 +323,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
 </body>
+
 </html>
