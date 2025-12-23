@@ -3,11 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEK KARGO - Xitoydan O‘zbekistonga yuk tashish</title>
+    <title>JEK KARGO - Xitoydan O'zbekistonga yuk tashish</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #61210F;
+            --secondary-color: #FDF0D5;
+            --dark-color: #1B1B19;
+            --accent-blue: #0071C0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--secondary-color);
+        }
+        .hero {
+            background: linear-gradient(rgba(97,33,15,0.9), rgba(97,33,15,0.85)), url('https://images.unsplash.com/photo-1558618047-3c8c76ca3e71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+        }
+        .service-card {
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        .navbar {
+            background: var(--primary-color) !important;
+        }
+        .navbar-brand img {
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-blue);
+        }
+        footer {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-primary:hover {
+            background-color: #4e1a0c;
+        }
+        .text-primary { color: var(--primary-color) !important; }
+        .bg-primary { background-color: var(--primary-color) !important; color: white; }
+        .service-card i { color: var(--accent-blue); }
+        .card { background: white; }
+        .hero p, .hero h1 { text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .result-card {
+            border-left: 4px solid var(--accent-blue);
+        }
+        .border-dashed {
+            border: 3px dashed #ccc;
+            border-radius: 12px;
+        }
+        .message-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .message-time {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .admin-section {
+            margin-bottom: 30px;
+        }
+        .table-responsive {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,8 +88,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
         <a class="navbar-brand" href="#home" onclick="adminClickCounter()" style="cursor: pointer;">
-            <img id="siteLogo" src="jek-logo.png" alt="JEK KARGO" class="me-2">
-            <span id="siteTitle">JEK KARGO</span>
+            <img src="https://via.placeholder.com/40" alt="JEK KARGO" class="me-2">
+            JEK KARGO
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -38,9 +111,9 @@
     <!-- Hero Section -->
     <section id="home" class="hero text-center">
         <div class="container">
-            <h1 id="heroTitle" class="display-4 fw-bold mb-4">Xitoydan O‘zbekistonga tez yuk tashish</h1>
-            <p id="heroSubtitle" class="lead mb-4">JEK KARGO - ishonchli logistika xizmati.</p>
-            <div id="heroPrices" class="mb-4 p-3 bg-dark bg-opacity-50 rounded d-inline-block">
+            <h1 class="display-4 fw-bold mb-4">Xitoydan O'zbekistonga tez yuk tashish</h1>
+            <p class="lead mb-4">JEK KARGO - ishonchli logistika xizmati.</p>
+            <div class="mb-4 p-3 bg-dark bg-opacity-50 rounded d-inline-block">
                 <strong>Narxlar (kg uchun): 💲</strong><br>
                 <em>Avto: $6-7.5 🚚 (14-18 kun) | Avia: $9.5-11 ✈️ (3-5 kun)</em><br>
                 <small>1 kg+ : Eng yaqin Emu Pochta bepul!</small>
@@ -55,8 +128,42 @@
     <section id="services" class="py-5">
         <div class="container">
             <h2 class="text-center mb-5">Xizmatlar</h2>
-            <div id="servicesContainer" class="row g-4">
-                <!-- Services will be injected here -->
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center p-4 shadow-sm">
+                        <i class="fas fa-plane fa-3x mb-3"></i>
+                        <h4>Avia kargo</h4>
+                        <p>3-5 kun. $9.5-11/kg ✈️</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center p-4 shadow-sm">
+                        <i class="fas fa-truck fa-3x mb-3"></i>
+                        <h4>Avto kargo</h4>
+                        <p>14-18 kun. $6-7.5/kg 🚚</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center p-4 shadow-sm">
+                        <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                        <h4>Sug'urta</h4>
+                        <p>To'liq himoya.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center p-4 shadow-sm">
+                        <i class="fas fa-headset fa-3x mb-3"></i>
+                        <h4>24/7 Yordam</h4>
+                        <p>Kuzatish va maslahat.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center p-4 shadow-sm">
+                        <i class="fas fa-warehouse fa-3x mb-3"></i>
+                        <h4>Zamonaviy ombor</h4>
+                        <p>Yiwu shahrida xavfsiz saqlash.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -82,11 +189,11 @@
                                     <input type="number" class="form-control" id="items" min="1" value="1" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Og‘irligi (kg)</label>
+                                    <label class="form-label">Og'irligi (kg)</label>
                                     <input type="number" class="form-control" id="weight" min="0.1" step="0.1" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">O‘lchamlar (sm: UxExB)</label>
+                                    <label class="form-label">O'lchamlar (sm: UxExB)</label>
                                     <input type="text" class="form-control" id="dimensions" placeholder="mas: 50x30x20">
                                 </div>
                                 <div class="col-12">
@@ -126,34 +233,28 @@
             <div class="row">
                 <div class="col-md-6">
                     <h5><i class="fas fa-map-marker-alt me-2 text-primary"></i>Ofislar</h5>
-                    <div id="contactOffices">
-                        <p><strong>Xitoy:</strong> Yiwu<br>
-                        <strong>O‘zbekiston:</strong> Toshkent (asosiy), Namangan</p>
-                    </div>
-                    <div id="contactDetails">
-                        <p><i class="fas fa-phone me-2"></i><span id="contactPhone">+998 94 948 0542</span><br>
-                        <i class="fab fa-telegram me-2"></i><a id="tg1" href="https://t.me/jekkargo" target="_blank" class="text-primary">t.me/jekkargo</a> | 
-                        <a id="tg2" href="https://t.me/jek_kargo" target="_blank" class="text-primary">t.me/jek_kargo</a><br>
-                        <i class="fab fa-instagram"></i> <a id="instagram" href="https://instagram.com/jekkargo" target="_blank" class="text-primary">@jekkargo</a></p>
-                    </div>
+                    <p><strong>Xitoy:</strong> Yiwu<br>
+                    <strong>O'zbekiston:</strong> Toshkent (asosiy), Namangan</p>
+                    <p><i class="fas fa-phone me-2"></i>+998 94 948 0542<br>
+                    <i class="fab fa-telegram me-2"></i><a href="https://t.me/jekkargo" target="_blank" class="text-primary">t.me/jekkargo</a> | <a href="https://t.me/jek_kargo" class="text-primary">t.me/jek_kargo</a><br>
+                    <i class="fab fa-instagram"></i> <a href="https://instagram.com/jekkargo" target="_blank" class="text-primary">@jekkargo</a></p>
                 </div>
                 <div class="col-md-6">
-                   <!-- Inside Contact section, replace the form part -->
-<form id="contactForm">
-    <div class="mb-3">
-        <label class="form-label">Ism</label>
-        <input type="text" id="contactName" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Telefon</label>
-        <input type="tel" id="contactPhoneInput" class="form-control" required> <!-- renamed to avoid conflict -->
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Xabar</label>
-        <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Yuborish</button>
-</form>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label class="form-label">Ism</label>
+                            <input type="text" id="contactName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefon</label>
+                            <input type="tel" id="contactPhone" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Xabar</label>
+                            <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -163,8 +264,8 @@
 <!-- Footer -->
 <footer class="py-4 text-center">
     <div class="container">
-        <p id="footerText">© 2025 JEK KARGO. Huquqlar himoyalangan.</p>
-        <div id="footerSocial">
+        <p>&copy; 2025 JEK KARGO. Huquqlar himoyalangan.</p>
+        <div>
             <a href="https://t.me/jekkargo" class="text-secondary me-3 fs-3" target="_blank"><i class="fab fa-telegram"></i></a>
             <a href="https://t.me/jek_kargo" class="text-secondary me-3 fs-3" target="_blank"><i class="fab fa-telegram"></i></a>
             <a href="https://instagram.com/jekkargo" class="text-secondary fs-3" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -181,139 +282,191 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <label>Parol:</label>
-                <input type="password" class="form-control" id="adminPassword" onkeypress="if(event.key==='Enter') adminAuth()">
+                <label class="form-label">Parol:</label>
+                <input type="password" class="form-control" id="adminPassword" placeholder="Parolni kiriting" onkeypress="if(event.key==='Enter') adminAuth()">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
                 <button type="button" class="btn btn-primary" onclick="adminAuth()">Kirish</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Code Edit Modal -->
+<div class="modal fade" id="codeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="codeModalTitle">Trek Kodni Tahrirlash</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="codeForm">
+                    <div class="mb-3">
+                        <label class="form-label">Trek Kod</label>
+                        <input type="text" class="form-control" id="editTrackingCode" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Turi</label>
+                        <select class="form-select" id="editType">
+                            <option value="Avia">Avia</option>
+                            <option value="Avto">Avto</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Reys</label>
+                        <input type="text" class="form-control" id="editFlight" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Og'irlik (kg)</label>
+                        <input type="number" class="form-control" id="editWeight" step="0.1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Qabul Sanasi</label>
+                        <input type="date" class="form-control" id="editReceiptDate">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Narx ($/kg)</label>
+                        <input type="number" class="form-control" id="editPricePerKg" step="0.1" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                <button type="button" class="btn btn-primary" onclick="saveCode()">Saqlash</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Admin Panel -->
-<section id="adminPanel" style="display:none;" class="py-5">
-    <div class="container">
+<section id="adminPanel" style="display:none;">
+    <div class="container py-5">
         <div class="card shadow">
-            <div class="card-header bg-primary text-white d-flex justify-content-between">
-                <h3>Next Level Admin Panel</h3>
-                <button class="btn btn-light" onclick="logout()">Chiqish</button>
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3><i class="fas fa-shield-alt me-2"></i>Admin Panel</h3>
+                <button class="btn btn-light" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Chiqish</button>
             </div>
             <div class="card-body">
-                <ul class="nav nav-tabs mb-4" id="adminTabs">
-                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-content">Sayt kontenti</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-settings">Sozlamalar</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-messages">Xabarlar</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-excel">Excel fayllar</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-stats">Statistika</a></li>
-                </ul>
-
-                <div class="tab-content">
-                    <!-- Content Editing -->
-                    <div class="tab-pane fade show active" id="tab-content">
-                        <h4>Sayt matnlari va logotip</h4>
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label>Sayt nomi</label>
-                                <input type="text" id="editSiteTitle" class="form-control">
-                                <button class="btn btn-sm btn-primary mt-2" onclick="saveContent()">Saqlash</button>
-                            </div>
-                            <div class="col-12">
-                                <label>Logotip (URL yoki local yuklash)</label>
-                                <input type="file" id="logoUpload" accept="image/*" class="form-control">
-                                <small>URL kiriting yoki fayl yuklang</small>
-                                <input type="text" id="editLogoUrl" class="form-control mt-2" placeholder="https://...">
-                            </div>
-                            <div class="col-12">
-                                <label>Hero sarlavha</label>
-                                <input type="text" id="editHeroTitle" class="form-control">
-                            </div>
-                            <div class="col-12">
-                                <label>Hero qisqacha</label>
-                                <textarea id="editHeroSubtitle" class="form-control" rows="2"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <label>Hero narxlar bloki (HTML ruxsat)</label>
-                                <textarea id="editHeroPrices" class="form-control" rows="5"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <label>Kontakt ma'lumotlari (ofislar)</label>
-                                <textarea id="editContactOffices" class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <label>Telefon va ijtimoiy tarmoqlar</label>
-                                <input type="text" id="editContactPhone" placeholder="Telefon" class="form-control mb-2">
-                                <input type="text" id="editTg1" placeholder="Telegram 1" class="form-control mb-2">
-                                <input type="text" id="editTg2" placeholder="Telegram 2" class="form-control mb-2">
-                                <input type="text" id="editInstagram" placeholder="Instagram" class="form-control mb-2">
-                            </div>
-                            <div class="col-12">
-                                <label>Footer matni</label>
-                                <input type="text" id="editFooterText" class="form-control">
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <h4>Xizmatlar (qo'shish/o'chirish)</h4>
-                        <div id="adminServicesList"></div>
-                        <button class="btn btn-success mt-3" onclick="addNewService()">+ Yangi xizmat qo'shish</button>
-                        <button class="btn btn-primary mt-3 ms-2" onclick="saveContent()">Barchasini saqlash</button>
-                    </div>
-
-                    <!-- Other tabs remain similar but cleaner -->
-                    <div class="tab-pane fade" id="tab-settings">
-                        <!-- Existing settings -->
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label>Dollar kursi</label>
-                                <div class="input-group">
-                                    <input type="number" id="dollarRate" class="form-control">
-                                    <button class="btn btn-primary" onclick="saveSetting('dollarRate')">Saqlash</button>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label>Avia narxi</label>
-                                <div class="input-group">
-                                    <input type="number" step="0.1" id="aviaPrice" class="form-control">
-                                    <button class="btn btn-primary" onclick="saveSetting('aviaPrice')">Saqlash</button>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label>Avto narxi</label>
-                                <div class="input-group">
-                                    <input type="number" step="0.1" id="avtoPrice" class="form-control">
-                                    <button class="btn btn-primary" onclick="saveSetting('avtoPrice')">Saqlash</button>
-                                </div>
-                            </div>
+                <!-- Stats -->
+                <div class="row mb-4 text-center">
+                    <div class="col-md-3">
+                        <div class="card p-3 bg-primary text-white">
+                            <h5>Jami tashriflar</h5>
+                            <h4 id="totalVisits">0</h4>
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="tab-messages">
-                        <h4>Mijoz xabarlari</h4>
-                        <div id="clientMessages" class="border p-3 rounded" style="max-height:500px;overflow-y:auto;background:#f8f9fa;"></div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab-excel">
-                        <h4>Excel fayllar</h4>
-                        <div class="border-dashed p-5 text-center mb-4" onclick="document.getElementById('fileInput').click()" style="cursor:pointer;">
-                            <p>📁 Faylni yuklang</p>
+                    <div class="col-md-3">
+                        <div class="card p-3 bg-success text-white">
+                            <h5>Qidirilgan kodlar</h5>
+                            <h4 id="totalSearches">0</h4>
                         </div>
-                        <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none;" onchange="uploadFile(event)">
-                        <div id="fileList"></div>
                     </div>
-
-                    <div class="tab-pane fade" id="tab-stats">
-                        <div class="row text-center mb-4">
-                            <div class="col-md-3"><div class="card p-3"><h5>Tashriflar</h5><h4 id="totalVisits">0</h4></div></div>
-                            <div class="col-md-3"><div class="card p-3"><h5>Qidiruvlar</h5><h4 id="totalSearches">0</h4></div></div>
-                            <div class="col-md-3"><div class="card p-3"><h5>Fayllar</h5><h4 id="uploadedFiles">0</h4></div></div>
-                            <div class="col-md-3"><div class="card p-3"><h5>Kodlar</h5><h4 id="totalCodes">0</h4></div></div>
+                    <div class="col-md-3">
+                        <div class="card p-3 bg-info text-white">
+                            <h5>Yuklangan fayllar</h5>
+                            <h4 id="uploadedFiles">0</h4>
                         </div>
-                        <h5>Faoliyat jurnali</h5>
-                        <div id="activityLog" class="border p-3 rounded" style="max-height:400px;overflow-y:auto;background:#f8f9fa;"></div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="card p-3 bg-warning text-dark">
+                            <h5>Jami trek kodlar</h5>
+                            <h4 id="totalCodes">0</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Messages -->
+                <div class="admin-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4><i class="fas fa-envelope me-2"></i>Mijoz xabarlari</h4>
+                        <button class="btn btn-danger btn-sm" onclick="clearAllMessages()">Barchasini o'chirish</button>
+                    </div>
+                    <div id="clientMessages" class="border p-3 rounded" style="max-height:400px; overflow-y:auto; background:#f8f9fa;"></div>
+                </div>
+
+                <!-- Trek Kodlar Boshqaruvi -->
+                <div class="admin-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4><i class="fas fa-barcode me-2"></i>Trek Kodlar Boshqaruvi</h4>
+                        <div>
+                            <button class="btn btn-success" onclick="addNewCode()"><i class="fas fa-plus me-2"></i>Yangi Qo'shish</button>
+                            <button class="btn btn-info" onclick="exportCodesToExcel()"><i class="fas fa-download me-2"></i>Excel ga Eksport</button>
+                            <button class="btn btn-danger" onclick="deleteAllCodes()"><i class="fas fa-trash-alt me-2"></i>Barchasini O'chirish</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Search and Filter -->
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="codeSearch" placeholder="Trek kod yoki reys bo'yicha qidirish..." oninput="displayTrackingCodes()">
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" id="filterType" onchange="displayTrackingCodes()">
+                                <option value="all">Barchasi</option>
+                                <option value="Avia">Avia</option>
+                                <option value="Avto">Avto</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="trackingCodesList" class="border rounded p-3" style="background:#f8f9fa;"></div>
+                </div>
+
+                <!-- File Upload -->
+                <div class="admin-section">
+                    <h4><i class="fas fa-file-upload me-2"></i>Excel Fayl Yuklash</h4>
+                    <div class="border-dashed p-5 text-center mb-4" onclick="document.getElementById('fileInput').click()" style="cursor:pointer;">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                        <p class="mb-0">📁 Faylni bosing yoki sudrab keling</p>
+                        <small class="text-muted">Format: "Avia 24.xlsx" yoki "Avto 29.xlsx"</small>
+                    </div>
+                    <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none;" onchange="uploadFile(event)">
+                    <div id="fileList" class="mt-3"></div>
+                </div>
+
+                <!-- Settings -->
+                <div class="admin-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4><i class="fas fa-cog me-2"></i>Sozlamalar</h4>
+                        <button class="btn btn-warning btn-sm" onclick="resetSettings()">Asl Holatiga Qaytarish</button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label>Dollar kursi (so'm):</label>
+                            <div class="input-group">
+                                <span class="input-group-text">💵</span>
+                                <input type="number" class="form-control" id="dollarRate" value="12200">
+                                <button class="btn btn-primary" onclick="saveSetting('dollarRate')">Saqlash</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Avia narxi ($/kg):</label>
+                            <div class="input-group">
+                                <span class="input-group-text">✈️</span>
+                                <input type="number" step="0.1" class="form-control" id="aviaPrice" value="9.5">
+                                <button class="btn btn-primary" onclick="saveSetting('aviaPrice')">Saqlash</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Avto narxi ($/kg):</label>
+                            <div class="input-group">
+                                <span class="input-group-text">🚚</span>
+                                <input type="number" step="0.1" class="form-control" id="avtoPrice" value="6">
+                                <button class="btn btn-primary" onclick="saveSetting('avtoPrice')">Saqlash</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="admin-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4><i class="fas fa-history me-2"></i>Faoliyat jurnali</h4>
+                        <button class="btn btn-warning btn-sm" onclick="resetStats()">Statistikani Tozalash</button>
+                    </div>
+                    <div id="activityLog" class="border p-3 rounded" style="max-height:400px; overflow-y:auto; background:#f8f9fa;"></div>
                 </div>
             </div>
         </div>
@@ -321,7 +474,537 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
-</body>
+<script>
+// Data & Logic
+let excelData = [];
+let settings = { dollarRate: 12200, aviaPrice: 9.5, avtoPrice: 6 };
+let stats = { visits: 0, searches: 0, uploadedFiles: 0, totalCodes: 0 };
+let activityLog = [];
+let clientMessages = [];
+let clickCount = 0;
+let clickTimer = null;
+let adminModal = null;
+let currentEditIndex = null;
 
-</html>
+window.onload = function() {
+    loadSettings();
+    loadStats();
+    loadClientMessages();
+    loadExcelFiles();
+    loadExcelData();
+    trackVisit();
+
+    adminModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
+};
+
+function adminClickCounter() {
+    clickCount++;
+    if (clickCount === 3) {
+        adminModal.show();
+        clickCount = 0;
+    }
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+}
+
+// Settings & Stats
+function loadSettings() {
+    const saved = localStorage.getItem('jekSettings');
+    if (saved) {
+        settings = JSON.parse(saved);
+        document.getElementById('dollarRate').value = settings.dollarRate;
+        document.getElementById('aviaPrice').value = settings.aviaPrice;
+        document.getElementById('avtoPrice').value = settings.avtoPrice;
+    }
+}
+
+function loadStats() {
+    const saved = localStorage.getItem('jekStats');
+    if (saved) stats = JSON.parse(saved);
+    updateStatsDisplay();
+}
+
+function saveStats() {
+    localStorage.setItem('jekStats', JSON.stringify(stats));
+    updateStatsDisplay();
+}
+
+function updateStatsDisplay() {
+    document.getElementById('totalVisits').textContent = stats.visits;
+    document.getElementById('totalSearches').textContent = stats.searches;
+    document.getElementById('uploadedFiles').textContent = stats.uploadedFiles;
+    document.getElementById('totalCodes').textContent = stats.totalCodes;
+}
+
+function trackVisit() {
+    stats.visits++;
+    saveStats();
+    logActivity('Saytga tashrif');
+}
+
+function logActivity(msg) {
+    const time = new Date().toLocaleTimeString();
+    activityLog.unshift({time, msg});
+    if (activityLog.length > 50) activityLog.pop();
+    const logEl = document.getElementById('activityLog');
+    if (logEl) {
+        logEl.innerHTML = activityLog.map(l => `<div><strong>[${l.time}]</strong> ${l.msg}</div>`).join('');
+    }
+}
+
+// Client Messages Management
+function loadClientMessages() {
+    const saved = localStorage.getItem('jekClientMessages');
+    if (saved) {
+        clientMessages = JSON.parse(saved);
+        displayClientMessages();
+    }
+}
+
+function saveClientMessage(name, phone, message) {
+    const timestamp = new Date().toLocaleString();
+    clientMessages.unshift({ name, phone, message, timestamp });
+    if (clientMessages.length > 100) clientMessages.pop();
+    localStorage.setItem('jekClientMessages', JSON.stringify(clientMessages));
+    logActivity(`Yangi mijoz xabari: ${name} (${phone})`);
+}
+
+function displayClientMessages() {
+    const container = document.getElementById('clientMessages');
+    if (clientMessages.length === 0) {
+        container.innerHTML = '<p class="text-muted">Hali xabar yo\'q</p>';
+        return;
+    }
+    container.innerHTML = clientMessages.map((msg, idx) => `
+        <div class="message-item">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>${msg.name}</strong> <span class="message-time">— ${msg.timestamp}</span><br>
+                    <strong>Telefon:</strong> ${msg.phone}<br>
+                    <p class="mb-0">${msg.message}</p>
+                </div>
+                <button class="btn btn-sm btn-danger" onclick="deleteMessage(${idx})">O'chirish</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function deleteMessage(idx) {
+    if (confirm('Bu xabarni o\'chirmoqchimisiz?')) {
+        clientMessages.splice(idx, 1);
+        localStorage.setItem('jekClientMessages', JSON.stringify(clientMessages));
+        displayClientMessages();
+        logActivity('Mijoz xabari o\'chirildi');
+    }
+}
+
+function clearAllMessages() {
+    if (confirm('Barcha xabarlarni o\'chirmoqchimisiz?')) {
+        clientMessages = [];
+        localStorage.setItem('jekClientMessages', JSON.stringify(clientMessages));
+        displayClientMessages();
+        logActivity('Barcha xabarlar o\'chirildi');
+    }
+}
+
+// Contact Form
+document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('contactName').value.trim();
+    const phone = document.getElementById('contactPhone').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+
+    if (name && phone && message) {
+        saveClientMessage(name, phone, message);
+        alert('Xabar yuborildi! Tez orada siz bilan bog\'lanamiz.');
+        e.target.reset();
+    } else {
+        alert('Iltimos, barcha maydonlarni to\'ldiring.');
+    }
+});
+
+// Price Calculator
+document.getElementById('quoteForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const service = document.getElementById('service').value;
+    const items = parseInt(document.getElementById('items').value) || 1;
+    const weight = parseFloat(document.getElementById('weight').value) || 0;
+    const dims = document.getElementById('dimensions').value.trim();
+
+    let maxDim = 0;
+    if (dims) {
+        const parts = dims.split(/[xX]/).map(p => parseFloat(p.trim())).filter(n => !isNaN(n));
+        if (parts.length === 3) maxDim = Math.max(...parts);
+    }
+
+    const isHighRate = (items >= 5) || (maxDim > 50);
+    const baseRate = service === 'avia' ? settings.aviaPrice : settings.avtoPrice;
+    const rate = isHighRate ? (service === 'avia' ? 11 : 7.5) : baseRate;
+    const totalUSD = (rate * weight).toFixed(2);
+    const totalUZS = Math.round(rate * weight * settings.dollarRate).toLocaleString();
+
+    const reason = isHighRate ? ' (Yuqori narx: donalar ≥5 yoki o\'lcham >50sm)' : '';
+
+    document.getElementById('quoteResult').innerHTML = `
+        <div class="alert alert-success text-center">
+            <h4>Narx: ${totalUSD} (${rate}$/kg)${reason}</h4>
+            <h5>So'mda: ${totalUZS} so'm</h5>
+            ${weight > 1 ? '<p class="mb-0"><strong>1kg+: Emu Pochta bepul!</strong></p>' : ''}
+        </div>
+    `;
+    document.getElementById('quoteResult').style.display = 'block';
+});
+
+// Tracking
+function trackCargo() {
+    const input = document.getElementById('trackingInput').value.trim();
+    if (!input) return alert('Trek raqam(lar)ini kiriting');
+    const codes = input.split(',').map(c => c.trim()).filter(c => c);
+
+    const results = codes.map(code => excelData.find(r => r.trackingCode === code)).filter(Boolean);
+
+    stats.searches++;
+    saveStats();
+    logActivity(`Qidiruv: ${codes.join(', ')}`);
+
+    const container = document.getElementById('trackingResults');
+    if (results.length === 0) {
+        container.innerHTML = '<div class="alert alert-warning text-center">Hech nima topilmadi</div>';
+        return;
+    }
+
+    container.innerHTML = results.map(item => {
+        const cost = Math.round(item.weight * item.pricePerKg * settings.dollarRate);
+        const delivery = calculateDeliveryDate(item.receiptDate, item.type);
+        return `
+            <div class="card result-card mb-3">
+                <div class="card-body">
+                    <h5>${item.trackingCode} 
+                        <button class="btn btn-sm btn-outline-secondary float-end" onclick="navigator.clipboard.writeText('${item.trackingCode}'); alert('Nusxalandi!')">📋</button>
+                    </h5>
+                    <p><strong>Og'irlik:</strong> ${item.weight} kg | <strong>Narx:</strong> ${cost.toLocaleString()} so'm</p>
+                    <p><strong>Qabul sanasi:</strong> ${item.receiptDate} | <strong>Reys:</strong> ${item.flight}</p>
+                    <p><strong>Taxminiy yetib kelish:</strong> ${delivery}</p>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function calculateDeliveryDate(dateStr, type) {
+    if (!dateStr) return 'Noma\'lum';
+    const date = new Date(dateStr);
+    const min = type === 'Avia' ? 3 : 14;
+    const max = type === 'Avia' ? 5 : 18;
+    const minDate = new Date(date); minDate.setDate(date.getDate() + min);
+    const maxDate = new Date(date); maxDate.setDate(date.getDate() + max);
+    return `${minDate.toLocaleDateString('uz-UZ')} - ${maxDate.toLocaleDateString('uz-UZ')}`;
+}
+
+// Excel Data Management
+function loadExcelData() {
+    const saved = localStorage.getItem('jekExcelData');
+    if (saved) {
+        excelData = JSON.parse(saved);
+        stats.totalCodes = excelData.length;
+        saveStats();
+    }
+}
+
+function saveExcelData() {
+    localStorage.setItem('jekExcelData', JSON.stringify(excelData));
+    stats.totalCodes = excelData.length;
+    saveStats();
+}
+
+function uploadFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, {type: 'array'});
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(sheet, {header: 1});
+        parseExcelData(json, file.name);
+        stats.uploadedFiles++;
+        saveStats();
+        logActivity(`Fayl yuklandi: ${file.name}`);
+        saveExcelFile(file.name, json);
+        loadExcelFiles();
+        displayTrackingCodes();
+        alert('Fayl muvaffaqiyatli yuklandi!');
+    };
+    reader.readAsArrayBuffer(file);
+    event.target.value = '';
+}
+
+function parseExcelData(data, filename) {
+    const type = filename.toLowerCase().includes('avia') ? 'Avia' : 'Avto';
+    const flightNum = filename.match(/\d+/) ? filename.match(/\d+/)[0] : '1';
+    const flight = `${type} ${flightNum}`;
+    const price = type === 'Avia' ? settings.aviaPrice : settings.avtoPrice;
+
+    for (let i = 1; i < data.length; i++) {
+        const row = data[i];
+        if (row && row[2]) {
+            excelData.push({
+                trackingCode: String(row[2]),
+                receiptDate: row[1] || '',
+                weight: parseFloat(row[6]) || 0,
+                flight: flight,
+                type: type,
+                pricePerKg: price
+            });
+        }
+    }
+    saveExcelData();
+}
+
+function saveExcelFile(filename, data) {
+    let files = JSON.parse(localStorage.getItem('jekExcelFiles') || '[]');
+    files.push({filename, uploadDate: new Date().toISOString(), rowCount: data.length - 1});
+    localStorage.setItem('jekExcelFiles', JSON.stringify(files));
+}
+
+function deleteFile(filename) {
+    if (!confirm('Bu fayl va undagi barcha trek kodlarni o\'chirmoqchimisiz?')) return;
+    let files = JSON.parse(localStorage.getItem('jekExcelFiles') || '[]');
+    files = files.filter(f => f.filename !== filename);
+    localStorage.setItem('jekExcelFiles', JSON.stringify(files));
+
+    const type = filename.toLowerCase().includes('avia') ? 'Avia' : 'Avto';
+    const flightNum = filename.match(/\d+/) ? filename.match(/\d+/)[0] : null;
+    const flight = flightNum ? `${type} ${flightNum}` : null;
+
+    if (flight) {
+        const prev = excelData.length;
+        excelData = excelData.filter(r => r.flight !== flight);
+        saveExcelData();
+        logActivity(`Fayl o'chirildi: ${filename} (${prev - excelData.length} kod o'chirildi)`);
+    }
+    stats.uploadedFiles = files.length;
+    saveStats();
+    loadExcelFiles();
+    displayTrackingCodes();
+}
+
+function loadExcelFiles() {
+    const files = JSON.parse(localStorage.getItem('jekExcelFiles') || '[]');
+    const container = document.getElementById('fileList');
+    if (files.length === 0) {
+        container.innerHTML = '<p class="text-muted">Hali fayl yuklanmagan</p>';
+        return;
+    }
+    container.innerHTML = files.map(f => `
+        <div class="d-flex justify-content-between align-items-center p-3 border mb-2 rounded">
+            <div>
+                <strong>${f.filename}</strong><br>
+                <small>${new Date(f.uploadDate).toLocaleString()} | ${f.rowCount} kod</small>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="deleteFile('${f.filename}')">O'chirish</button>
+        </div>
+    `).join('');
+}
+
+// Tracking Code Management
+function displayTrackingCodes() {
+    const container = document.getElementById('trackingCodesList');
+    const searchTerm = document.getElementById('codeSearch').value.toLowerCase();
+    const filterType = document.getElementById('filterType').value;
+    
+    let filtered = excelData;
+    if (searchTerm) {
+        filtered = filtered.filter(item => 
+            item.trackingCode.toLowerCase().includes(searchTerm) ||
+            item.flight.toLowerCase().includes(searchTerm)
+        );
+    }
+    if (filterType !== 'all') {
+        filtered = filtered.filter(item => item.type === filterType);
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<p class="text-muted text-center">Trek kodlar topilmadi</p>';
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trek Kod</th>
+                        <th>Turi</th>
+                        <th>Reys</th>
+                        <th>Og'irlik (kg)</th>
+                        <th>Sana</th>
+                        <th>Narx ($/kg)</th>
+                        <th>Amallar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${filtered.map((item, idx) => `
+                        <tr>
+                            <td><strong>${item.trackingCode}</strong></td>
+                            <td><span class="badge bg-${item.type === 'Avia' ? 'primary' : 'success'}">${item.type}</span></td>
+                            <td>${item.flight}</td>
+                            <td>${item.weight}</td>
+                            <td>${item.receiptDate}</td>
+                            <td>${item.pricePerKg}</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" onclick="editCode(${excelData.indexOf(item)})">✏️</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteCode(${excelData.indexOf(item)})">🗑️</button>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function addNewCode() {
+    const modal = new bootstrap.Modal(document.getElementById('codeModal'));
+    document.getElementById('codeModalTitle').textContent = 'Yangi Trek Kod Qo\'shish';
+    document.getElementById('codeForm').reset();
+    currentEditIndex = null;
+    modal.show();
+}
+
+function editCode(idx) {
+    const item = excelData[idx];
+    const modal = new bootstrap.Modal(document.getElementById('codeModal'));
+    document.getElementById('codeModalTitle').textContent = 'Trek Kodni Tahrirlash';
+    
+    document.getElementById('editTrackingCode').value = item.trackingCode;
+    document.getElementById('editType').value = item.type;
+    document.getElementById('editFlight').value = item.flight;
+    document.getElementById('editWeight').value = item.weight;
+    document.getElementById('editReceiptDate').value = item.receiptDate;
+    document.getElementById('editPricePerKg').value = item.pricePerKg;
+    
+    currentEditIndex = idx;
+    modal.show();
+}
+
+function saveCode() {
+    const trackingCode = document.getElementById('editTrackingCode').value.trim();
+    const type = document.getElementById('editType').value;
+    const flight = document.getElementById('editFlight').value.trim();
+    const weight = parseFloat(document.getElementById('editWeight').value);
+    const receiptDate = document.getElementById('editReceiptDate').value;
+    const pricePerKg = parseFloat(document.getElementById('editPricePerKg').value);
+
+    if (!trackingCode || !flight || isNaN(weight) || isNaN(pricePerKg)) {
+        alert('Iltimos, barcha maydonlarni to\'g\'ri to\'ldiring!');
+        return;
+    }
+
+    const codeData = { trackingCode, type, flight, weight, receiptDate, pricePerKg };
+
+    if (currentEditIndex !== null) {
+        excelData[currentEditIndex] = codeData;
+        logActivity(`Trek kod tahrirlandi: ${trackingCode}`);
+    } else {
+        excelData.push(codeData);
+        logActivity(`Yangi trek kod qo'shildi: ${trackingCode}`);
+    }
+
+    saveExcelData();
+    displayTrackingCodes();
+    bootstrap.Modal.getInstance(document.getElementById('codeModal')).hide();
+}
+
+function deleteCode(idx) {
+    if (confirm('Bu trek kodni o\'chirmoqchimisiz?')) {
+        const code = excelData[idx].trackingCode;
+        excelData.splice(idx, 1);
+        saveExcelData();
+        displayTrackingCodes();
+        logActivity(`Trek kod o'chirildi: ${code}`);
+    }
+}
+
+function deleteAllCodes() {
+    if (confirm('BARCHA trek kodlarni o\'chirmoqchimisiz? Bu amalni qaytarib bo\'lmaydi!')) {
+        if (confirm('Ishonchingiz komilmi? Barcha ma\'lumotlar yo\'qoladi!')) {
+            excelData = [];
+            saveExcelData();
+            displayTrackingCodes();
+            logActivity('Barcha trek kodlar o\'chirildi');
+            alert('Barcha trek kodlar o\'chirildi!');
+        }
+    }
+}
+
+function exportCodesToExcel() {
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Trek Kodlar');
+    XLSX.writeFile(wb, `JEK_KARGO_${new Date().toISOString().split('T')[0]}.xlsx`);
+    logActivity('Trek kodlar Excel ga eksport qilindi');
+}
+
+// Settings
+function saveSetting(name) {
+    const val = parseFloat(document.getElementById(name).value);
+    if (isNaN(val)) return alert('Raqam kiriting');
+    settings[name] = val;
+    localStorage.setItem('jekSettings', JSON.stringify(settings));
+    logActivity(`${name} yangilandi: ${val}`);
+    alert('Saqlandi!');
+
+    excelData.forEach(item => {
+        item.pricePerKg = item.type === 'Avia' ? settings.aviaPrice : settings.avtoPrice;
+    });
+    saveExcelData();
+}
+
+function resetSettings() {
+    if (confirm('Barcha sozlamalarni asl holatiga qaytarmoqchimisiz?')) {
+        settings = { dollarRate: 12200, aviaPrice: 9.5, avtoPrice: 6 };
+        localStorage.setItem('jekSettings', JSON.stringify(settings));
+        document.getElementById('dollarRate').value = settings.dollarRate;
+        document.getElementById('aviaPrice').value = settings.aviaPrice;
+        document.getElementById('avtoPrice').value = settings.avtoPrice;
+        logActivity('Sozlamalar asl holatiga qaytarildi');
+        alert('Sozlamalar qaytarildi!');
+    }
+}
+
+function resetStats() {
+    if (confirm('Barcha statistikani tozalamoqchimisiz?')) {
+        stats = { visits: 0, searches: 0, uploadedFiles: excelData.length, totalCodes: excelData.length };
+        saveStats();
+        logActivity('Statistika tozalandi');
+        alert('Statistika tozalandi!');
+    }
+}
+
+// Admin Auth & Logout
+function adminAuth() {
+    const password = document.getElementById('adminPassword').value;
+    if (password === 's08121719') {
+        adminModal.hide();
+        document.querySelector('main').style.display = 'none';
+        document.querySelector('nav').style.display = 'none';
+        document.querySelector('footer').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        loadExcelFiles();
+        displayClientMessages();
+        displayTrackingCodes();
+        logActivity('Admin panelga kirdi');
+    } else {
+        alert('Noto\'g\'ri parol!');
+    }
+}
+
+function logout() {
+    document.getElementById('adminPanel').style.display = 'none';
+    document.querySelector('main').style.display = 'block';
+    document.querySelector('nav').style.display = 'block';
+    document.querySelector('footer').style.display = 'block';
+    document.getElementById('adminPassword').value = '';
+    logActivity('Admin paneldan chiqdi');
+}
